@@ -1,0 +1,14 @@
+#!/bin/sh
+exec tail -n +3 $0
+# This file provides an easy way to add custom menu entries.  Simply type the
+# menu entries you want to add after this comment.  Be careful not to change
+# the 'exec tail' line above.
+menuentry "Btw I use Arch" {
+        insmod lvm
+        insmod linux
+        search --no-floppy --set=root --fs-uuid d74d193b-688e-4338-a9aa-cb468f8ba81e
+        set isofile="/assignment2/arch.iso"
+        loopback loop (lvm/HardenDefault--vg-root)$isofile
+        linux (loop)/arch/boot/x86_64/vmlinuz iso-scan/filename=$isofile noprompt noeject root=d74d193b-688e-4338-a9aa-cb468f8ba81e
+        initrd (loop)/arch/boot/x86_64/archiso.img
+}
